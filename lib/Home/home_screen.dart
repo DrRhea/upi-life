@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import '../MentalHealth/mental_health_screen.dart';
 import '../Academic/academic_screen.dart';
 import '../Finance/finance_screen.dart';
+import '../Schedule/schedule_screen.dart';
+import '../Notification/notification_screen.dart';
+import '../Forum/forum_screen.dart';
+import '../SocialMedia/social_media_screen.dart';
+import '../ELearning/elearning_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -47,30 +52,7 @@ class HomeScreen extends StatelessWidget {
                 return _FeatureCard(
                   feature: feature,
                   onTap: () {
-                    if (feature.title == 'Mental Health') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MentalHealthScreen(),
-                        ),
-                      );
-                    } else if (feature.title == 'Akademik') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AcademicScreen(),
-                        ),
-                      );
-                    } else if (feature.title == 'Keuangan') {
-                      navigateToFinanceScreen(context);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content:
-                              Text('${feature.title} belum diimplementasikan'),
-                        ),
-                      );
-                    }
+                    _navigateToFeature(context, feature.title);
                   },
                 );
               },
@@ -79,6 +61,48 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _navigateToFeature(BuildContext context, String title) {
+    Widget? screen;
+
+    switch (title) {
+      case 'Mental Health':
+        screen = const MentalHealthScreen();
+        break;
+      case 'Akademik':
+        screen = const AcademicScreen();
+        break;
+      case 'Keuangan':
+        screen = const FinanceScreen();
+        break;
+      case 'Jadwal & Todo':
+        screen = const ScheduleScreen();
+        break;
+      case 'Notifikasi':
+        screen = const NotificationScreen();
+        break;
+      case 'Pesan & Group':
+        screen = const ForumScreen();
+        break;
+      case 'Medsos':
+        screen = const SocialMediaScreen();
+        break;
+      case 'Elearning':
+        screen = const ELearningScreen();
+        break;
+    }
+
+    if (screen != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => screen!),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('$title belum diimplementasikan')),
+      );
+    }
   }
 }
 
