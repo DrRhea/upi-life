@@ -9,12 +9,13 @@ class AcademicScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Akademik'),
         centerTitle: true,
+        backgroundColor: Colors.red,
       ),
       body: Column(
         children: [
           Container(
             color: Colors.red,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -22,7 +23,7 @@ class AcademicScreen extends StatelessWidget {
                   'Akademik',
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold),
                 ),
                 Row(
@@ -40,9 +41,10 @@ class AcademicScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [
-                _InfoCard(title: 'Perolehan SKS: 120'),
-                _InfoCard(title: 'IPK: 3.75'),
-                _InfoCard(title: 'Lama Studi: 4 Tahun'),
+                _InfoCard(title: 'Perolehan SKS\n120'),
+                _InfoCard(title: 'IPK\n3.75'),
+                _InfoCard(title: 'Lama Studi\n4 Tahun'),
+                _InfoCard(title: 'Status\nAktif'),
               ],
             ),
           ),
@@ -51,54 +53,79 @@ class AcademicScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columns: const [
-                    DataColumn(label: Text('Mata Kuliah')),
-                    DataColumn(label: Text('SKS')),
-                    DataColumn(label: Text('Nilai')),
-                  ],
-                  rows: const [
-                    DataRow(cells: [
-                      DataCell(Text('Pemrograman Mobile')),
-                      DataCell(Text('3')),
-                      DataCell(Text('A')),
+                child: Column(
+                  children: [
+                    _buildTable('Semester 1', [
+                      ['Matematika Dasar', '3', 'A'],
+                      ['Fisika Dasar', '3', 'B+'],
+                      ['Algoritma dan Pemrograman', '3', 'A-'],
+                      ['Pengantar Teknologi Informasi', '3', 'A'],
                     ]),
-                    DataRow(cells: [
-                      DataCell(Text('Basis Data')),
-                      DataCell(Text('3')),
-                      DataCell(Text('A-')),
+                    SizedBox(height: 20),
+                    _buildTable('Semester 2', [
+                      ['Struktur Data', '3', 'A'],
+                      ['Basis Data', '3', 'A-'],
+                      ['Jaringan Komputer', '3', 'B+'],
+                      ['Sistem Operasi', '3', 'A'],
                     ]),
-                    DataRow(cells: [
-                      DataCell(Text('Kecerdasan Buatan')),
-                      DataCell(Text('3')),
-                      DataCell(Text('B+')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Jaringan Komputer')),
-                      DataCell(Text('3')),
-                      DataCell(Text('A')),
+                    SizedBox(height: 20),
+                    _buildTable('Semester 3', [
+                      ['Pemrograman Mobile', '3', 'A'],
+                      ['Kecerdasan Buatan', '3', 'B+'],
+                      ['Interaksi Manusia dan Komputer', '3', 'A-'],
+                      ['Keamanan Siber', '3', 'A'],
                     ]),
                   ],
                 ),
               ),
             ),
           ),
-          BottomNavigationBar(
-            backgroundColor: Colors.white,
-            selectedItemColor: Colors.red,
-            unselectedItemColor: Colors.black54,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.phone), label: 'Kontak'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.tablet), label: 'Perangkat'),
-              BottomNavigationBarItem(icon: Icon(Icons.language), label: 'Web'),
-              BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Karier'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_today), label: 'Jadwal'),
-            ],
-          ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.black54,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.phone), label: 'Kontak'),
+          BottomNavigationBarItem(icon: Icon(Icons.tablet), label: 'Perangkat'),
+          BottomNavigationBarItem(icon: Icon(Icons.language), label: 'Web'),
+          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Karier'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today), label: 'Jadwal'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTable(String title, List<List<String>> data) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+        ),
+        SizedBox(
+          width: 600,
+          child: DataTable(
+            columnSpacing: 20,
+            columns: const [
+              DataColumn(label: Text('Mata Kuliah')),
+              DataColumn(label: Text('SKS')),
+              DataColumn(label: Text('Nilai')),
+            ],
+            rows: data
+                .map(
+                  (row) => DataRow(
+                    cells: row.map((cell) => DataCell(Text(cell))).toList(),
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -111,7 +138,7 @@ class _InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Card(
-        color: Colors.blue,
+        color: Colors.red,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
