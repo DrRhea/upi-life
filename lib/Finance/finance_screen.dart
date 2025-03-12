@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class FinanceScreen extends StatelessWidget {
   const FinanceScreen({super.key});
@@ -19,25 +20,57 @@ class FinanceScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            color: Colors.red,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('Saldo Anda',
+                    style: TextStyle(color: Colors.white, fontSize: 18)),
+                SizedBox(height: 8),
+                Text('Rp12.500.000',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              height: 200,
+              child: LineChart(
+                LineChartData(
+                  gridData: FlGridData(show: false),
+                  titlesData: FlTitlesData(show: false),
+                  borderData: FlBorderData(show: false),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: [
+                        FlSpot(1, 2),
+                        FlSpot(2, 3),
+                        FlSpot(3, 2.5),
+                        FlSpot(4, 3.5),
+                        FlSpot(5, 3),
+                        FlSpot(6, 4),
+                      ],
+                      isCurved: true,
+                      color: Colors.red,
+                      dotData: FlDotData(show: false),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 150,
-                    color: Colors.grey.shade300,
-                    child: const Center(
-                        child: Text('Grafik atau Ringkasan Keuangan')),
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    height: 80,
-                    color: Colors.grey.shade400,
-                    child: const Center(child: Text('Fitur Keuangan')),
-                  ),
-                  const SizedBox(height: 16),
                   const Text('Riwayat Transaksi',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
@@ -45,22 +78,23 @@ class FinanceScreen extends StatelessWidget {
                   Expanded(
                     child: ListView(
                       children: const [
-                        ListTile(
-                          leading: Icon(Icons.upload_file),
-                          title: Text('Pembayaran UKT'),
-                          subtitle: Text('Selasa, 4 Februari 2025'),
-                          trailing: Text('Rp5.000.000',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.download),
-                          title: Text('Refund Biaya Kuliah'),
-                          subtitle: Text('Senin, 20 Januari 2025'),
-                          trailing: Text('Rp1.000.000',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green)),
-                        ),
+                        _TransactionCard(
+                            title: 'Pembayaran UKT',
+                            date: '4 Feb 2025',
+                            amount: '-Rp5.000.000'),
+                        _TransactionCard(
+                            title: 'Refund Biaya Kuliah',
+                            date: '20 Jan 2025',
+                            amount: '+Rp1.000.000',
+                            isIncome: true),
+                        _TransactionCard(
+                            title: 'Beli Buku',
+                            date: '15 Jan 2025',
+                            amount: '-Rp200.000'),
+                        _TransactionCard(
+                            title: 'Transfer ke Rekan',
+                            date: '10 Jan 2025',
+                            amount: '-Rp1.500.000'),
                       ],
                     ),
                   ),
@@ -83,6 +117,37 @@ class FinanceScreen extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _TransactionCard extends StatelessWidget {
+  final String title;
+  final String date;
+  final String amount;
+  final bool isIncome;
+
+  const _TransactionCard({
+    required this.title,
+    required this.date,
+    required this.amount,
+    this.isIncome = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: ListTile(
+        leading: Icon(isIncome ? Icons.download : Icons.upload_file,
+            color: isIncome ? Colors.green : Colors.red),
+        title: Text(title),
+        subtitle: Text(date),
+        trailing: Text(amount,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isIncome ? Colors.green : Colors.red)),
       ),
     );
   }
