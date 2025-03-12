@@ -36,60 +36,88 @@ class MentalHealthScreen extends StatefulWidget {
 class _MentalHealthScreenState extends State<MentalHealthScreen> {
   int _currentCarouselIndex = 0;
   int _selectedNavIndex = 2; // Globe icon selected by default
-  final PageController _pageController =
-      PageController(initialPage: 0, viewportFraction: 0.85);
+  final PageController _pageController = PageController(
+    initialPage: 0,
+    viewportFraction: 0.85,
+  );
 
   final List<Map<String, String>> _carouselItems = [
     {
-      'title': 'Managing Stress',
-      'description': 'Learn simple techniques to reduce daily stress'
+      'title': 'Mengelola Stres',
+      'description': 'Pelajari teknik sederhana untuk mengurangi stres harian',
     },
     {
-      'title': 'Mindfulness Practice',
-      'description': 'Daily mindfulness exercises for mental clarity'
+      'title': 'Latihan Mindfulness',
+      'description': 'Latihan mindfulness harian untuk kejernihan mental',
     },
     {
-      'title': 'Healthy Sleep Habits',
-      'description': 'Improve your sleep quality for better mental health'
+      'title': 'Kebiasaan Tidur Sehat',
+      'description':
+          'Tingkatkan kualitas tidur untuk kesehatan mental yang lebih baik',
+    },
+    {
+      'title': 'Pola Makan Sehat',
+      'description': 'Nutrisi yang baik membantu menjaga kesehatan mental',
+    },
+    {
+      'title': 'Manajemen Waktu',
+      'description': 'Cara mengatur waktu agar tidak merasa terbebani',
     },
   ];
 
   final List<Map<String, String>> _articleItems = [
     {
-      'title': 'What is Mental Health',
-      'subtitle': 'Why is Mental Health Important',
+      'title': 'Apa Itu Kesehatan Mental?',
+      'subtitle': 'Mengapa Kesehatan Mental Itu Penting?',
       'content':
-          'Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act. It also helps determine how we handle stress, relate to others, and make choices...'
+          'Kesehatan mental mencakup kesejahteraan emosional, psikologis, dan sosial kita. Hal ini memengaruhi cara kita berpikir, merasa, dan bertindak. Kesehatan mental juga membantu dalam menangani stres, berhubungan dengan orang lain, dan membuat keputusan...',
     },
     {
-      'title': 'Anxiety Management',
-      'subtitle': 'Coping strategies for anxiety',
+      'title': 'Mengatasi Kecemasan',
+      'subtitle': 'Strategi Mengelola Kecemasan',
       'content':
-          'Anxiety is a normal reaction to stress and can be beneficial in some situations. It can alert us to dangers and help us prepare and pay attention. However, excessive anxiety can become problematic...'
+          'Kecemasan adalah reaksi normal terhadap stres dan bisa bermanfaat dalam beberapa situasi. Namun, kecemasan berlebihan bisa menjadi masalah jika mengganggu kehidupan sehari-hari. Teknik pernapasan, meditasi, dan olahraga dapat membantu mengatasinya...',
     },
     {
-      'title': 'Depression Awareness',
-      'subtitle': 'Understanding the signs and symptoms',
+      'title': 'Kesadaran tentang Depresi',
+      'subtitle': 'Memahami Tanda dan Gejalanya',
       'content':
-          'Depression is a common but serious mood disorder that affects how you feel, think, and handle daily activities. It causes persistent feelings of sadness and loss of interest in activities you once enjoyed...'
+          'Depresi adalah gangguan suasana hati yang umum tetapi serius, yang memengaruhi cara seseorang merasa, berpikir, dan menjalani aktivitas sehari-hari. Depresi menyebabkan perasaan sedih yang berkelanjutan dan kehilangan minat terhadap aktivitas yang sebelumnya dinikmati...',
+    },
+    {
+      'title': 'Manfaat Meditasi untuk Kesehatan Mental',
+      'subtitle': 'Bagaimana Meditasi Membantu Pikiran Lebih Tenang?',
+      'content':
+          'Meditasi telah terbukti secara ilmiah membantu mengurangi stres, meningkatkan fokus, dan memperbaiki suasana hati. Dengan latihan rutin, meditasi dapat menjadi alat yang kuat untuk menjaga keseimbangan emosional dan mental...',
+    },
+    {
+      'title': 'Cara Membangun Kebiasaan Positif',
+      'subtitle': 'Langkah Kecil Menuju Perubahan Besar',
+      'content':
+          'Membangun kebiasaan positif seperti bangun lebih awal, berolahraga, atau menulis jurnal harian dapat meningkatkan kesejahteraan mental. Langkah kecil yang konsisten akan membawa dampak besar dalam jangka panjang...',
     },
   ];
 
   final List<Map<String, String>> _hotlineItems = [
     {
-      'name': 'National Suicide Prevention Lifeline',
-      'number': '1-800-273-8255',
-      'hours': '24/7'
+      'name': 'Layanan Konseling Mahasiswa UPI',
+      'number': '(022) 2013163',
+      'hours': 'Senin-Jumat 08.00-16.00',
     },
     {
-      'name': 'Crisis Text Line',
-      'number': 'Text HOME to 741741',
-      'hours': '24/7'
+      'name': 'Layanan Sehat Jiwa (SEJIWA) KemenPPPA',
+      'number': '119 ext. 8',
+      'hours': '24/7',
     },
     {
-      'name': 'SAMHSA Treatment Referral Hotline',
-      'number': '1-877-726-4727',
-      'hours': 'Weekdays 8am-8pm'
+      'name': 'Yayasan Pulih (Dukungan Psikologis)',
+      'number': '0813-1833-5686',
+      'hours': 'Senin-Jumat 09.00-17.00',
+    },
+    {
+      'name': 'RSUP Dr. Hasan Sadikin Bandung (IGD Psikiatri)',
+      'number': '(022) 2034953',
+      'hours': '24/7',
     },
   ];
 
@@ -174,13 +202,14 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
         ],
       ),
       bottomNavigationBar: isDesktop ? null : _buildBottomNavBar(),
-      floatingActionButton: isDesktop
-          ? null
-          : FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: Colors.red,
-              child: const Icon(Icons.public),
-            ),
+      floatingActionButton:
+          isDesktop
+              ? null
+              : FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: Colors.red,
+                child: const Icon(Icons.public),
+              ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
@@ -203,10 +232,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                 SizedBox(width: 12),
                 Text(
                   'Mental Health',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -292,9 +318,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.red,
-            ),
+            decoration: const BoxDecoration(color: Colors.red),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -407,10 +431,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
     return AppBar(
       title: const Text(
         'Mental Health',
-        style: TextStyle(
-          color: Colors.grey,
-          fontWeight: FontWeight.w500,
-        ),
+        style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
       ),
       centerTitle: isDesktop,
       actions: [
@@ -453,38 +474,45 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
           const SizedBox(width: 16),
         ],
       ],
-      bottom: isDesktop
-          ? null
-          : PreferredSize(
-              preferredSize: const Size.fromHeight(50),
-              child: Container(
-                height: 50,
-                color: Colors.red,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search...',
-                          hintStyle:
-                              TextStyle(color: Colors.white.withOpacity(0.7)),
-                          border: InputBorder.none,
-                          prefixIcon:
-                              const Icon(Icons.search, color: Colors.white),
+      bottom:
+          isDesktop
+              ? null
+              : PreferredSize(
+                preferredSize: const Size.fromHeight(50),
+                child: Container(
+                  height: 50,
+                  color: Colors.red,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Search...',
+                            hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.7),
+                            ),
+                            border: InputBorder.none,
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: const TextStyle(color: Colors.white),
                         ),
-                        style: const TextStyle(color: Colors.white),
                       ),
-                    ),
-                    const SizedBox(width: 16),
-                    const Icon(Icons.chat_bubble_outline, color: Colors.black),
-                    const SizedBox(width: 16),
-                    const Icon(Icons.notifications_none, color: Colors.black),
-                  ],
+                      const SizedBox(width: 16),
+                      const Icon(
+                        Icons.chat_bubble_outline,
+                        color: Colors.black,
+                      ),
+                      const SizedBox(width: 16),
+                      const Icon(Icons.notifications_none, color: Colors.black),
+                    ],
+                  ),
                 ),
               ),
-            ),
     );
   }
 
@@ -497,10 +525,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
         if (isDesktop) ...[
           const Text(
             'Featured Resources',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
         ],
@@ -549,9 +574,10 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                       padding: const EdgeInsets.all(20),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: isDesktop
-                            ? CrossAxisAlignment.start
-                            : CrossAxisAlignment.center,
+                        crossAxisAlignment:
+                            isDesktop
+                                ? CrossAxisAlignment.start
+                                : CrossAxisAlignment.center,
                         children: [
                           Row(
                             children: [
@@ -573,9 +599,10 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                               ],
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment: isDesktop
-                                      ? CrossAxisAlignment.start
-                                      : CrossAxisAlignment.center,
+                                  crossAxisAlignment:
+                                      isDesktop
+                                          ? CrossAxisAlignment.start
+                                          : CrossAxisAlignment.center,
                                   children: [
                                     Text(
                                       _carouselItems[index]['title']!,
@@ -627,19 +654,21 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
         const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: _carouselItems.asMap().entries.map((entry) {
-            return Container(
-              width: 8,
-              height: 8,
-              margin: const EdgeInsets.symmetric(horizontal: 4),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _currentCarouselIndex == entry.key
-                    ? Colors.red
-                    : Colors.grey,
-              ),
-            );
-          }).toList(),
+          children:
+              _carouselItems.asMap().entries.map((entry) {
+                return Container(
+                  width: 8,
+                  height: 8,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color:
+                        _currentCarouselIndex == entry.key
+                            ? Colors.red
+                            : Colors.grey,
+                  ),
+                );
+              }).toList(),
         ),
         const SizedBox(height: 32),
       ],
@@ -714,13 +743,16 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
           )
         else
           Column(
-            children: _articleItems
-                .map((article) => _buildArticleCard(
-                      title: article['title']!,
-                      subtitle: article['subtitle']!,
-                      content: article['content']!,
-                    ))
-                .toList(),
+            children:
+                _articleItems
+                    .map(
+                      (article) => _buildArticleCard(
+                        title: article['title']!,
+                        subtitle: article['subtitle']!,
+                        content: article['content']!,
+                      ),
+                    )
+                    .toList(),
           ),
 
         const SizedBox(height: 32),
@@ -735,9 +767,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
   }) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () {},
         borderRadius: BorderRadius.circular(12),
@@ -753,11 +783,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                   color: Colors.red.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(
-                  Icons.article,
-                  color: Colors.red,
-                  size: 24,
-                ),
+                child: const Icon(Icons.article, color: Colors.red, size: 24),
               ),
               const SizedBox(height: 16),
               Text(
@@ -770,10 +796,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
               const SizedBox(height: 8),
               Text(
                 subtitle,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[700],
-                ),
+                style: TextStyle(fontSize: 14, color: Colors.grey[700]),
               ),
               const SizedBox(height: 12),
               Expanded(
@@ -837,10 +860,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[700],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -872,10 +892,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
       decoration: BoxDecoration(
         color: Colors.red.withOpacity(0.05),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.red.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.red.withOpacity(0.2), width: 1),
       ),
       child: Padding(
         padding: EdgeInsets.all(isDesktop ? 24 : 16),
@@ -885,11 +902,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.phone_in_talk,
-                  color: Colors.red,
-                  size: 24,
-                ),
+                const Icon(Icons.phone_in_talk, color: Colors.red, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Mental Health Hotlines',
@@ -902,7 +915,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'If you need immediate support, please contact one of these helplines',
+              'Jika butuh bantuan secepatnya, hubungi salah satu helplines di bawah berikut',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: isDesktop ? 16 : 14,
@@ -914,101 +927,107 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
             // Hotlines
             if (isDesktop)
               Row(
-                children: _hotlineItems
-                    .map((hotline) => Expanded(
-                          child: Card(
-                            elevation: 0,
-                            color: Colors.white,
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    hotline['name']!,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 8,
-                                      horizontal: 16,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.blue.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    child: Text(
-                                      hotline['number']!,
+                children:
+                    _hotlineItems
+                        .map(
+                          (hotline) => Expanded(
+                            child: Card(
+                              elevation: 0,
+                              color: Colors.white,
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      hotline['name']!,
+                                      textAlign: TextAlign.center,
                                       style: const TextStyle(
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Available: ${hotline['hours']!}',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey[700],
+                                    const SizedBox(height: 12),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 8,
+                                        horizontal: 16,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue.withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Text(
+                                        hotline['number']!,
+                                        style: const TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'Available: ${hotline['hours']!}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey[700],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ))
-                    .toList(),
+                        )
+                        .toList(),
               )
             else
               Column(
-                children: _hotlineItems
-                    .map((hotline) => Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: Column(
-                            children: [
-                              Text(
-                                hotline['name']!,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
+                children:
+                    _hotlineItems
+                        .map(
+                          (hotline) => Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Column(
+                              children: [
+                                Text(
+                                  hotline['name']!,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                hotline['number']!,
-                                style: const TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
+                                const SizedBox(height: 6),
+                                Text(
+                                  hotline['number']!,
+                                  style: const TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'Available: ${hotline['hours']!}',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.grey[700],
+                                Text(
+                                  'Available: ${hotline['hours']!}',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.grey[700],
+                                  ),
                                 ),
-                              ),
-                              if (_hotlineItems.last != hotline)
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: Divider(color: Colors.grey[300]),
-                                ),
-                            ],
+                                if (_hotlineItems.last != hotline)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 12),
+                                    child: Divider(color: Colors.grey[300]),
+                                  ),
+                              ],
+                            ),
                           ),
-                        ))
-                    .toList(),
+                        )
+                        .toList(),
               ),
           ],
         ),
@@ -1022,9 +1041,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey[50],
-        border: Border(
-          left: BorderSide(color: Colors.grey[200]!, width: 1),
-        ),
+        border: Border(left: BorderSide(color: Colors.grey[200]!, width: 1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1053,18 +1070,12 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                 const SizedBox(height: 12),
                 const Text(
                   'Welcome Back',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Track your mental health journey',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton(
@@ -1087,10 +1098,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
           // Upcoming events
           const Text(
             'Upcoming Events',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
           _buildEventCard(
@@ -1124,28 +1132,13 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
           // Quick resources
           const Text(
             'Quick Resources',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
-          _buildQuickResourceItem(
-            'Self-Assessment Tools',
-            Icons.assessment,
-          ),
-          _buildQuickResourceItem(
-            'Breathing Exercises',
-            Icons.air,
-          ),
-          _buildQuickResourceItem(
-            'Mental Health Journal',
-            Icons.book,
-          ),
-          _buildQuickResourceItem(
-            'Therapy Resources',
-            Icons.health_and_safety,
-          ),
+          _buildQuickResourceItem('Self-Assessment Tools', Icons.assessment),
+          _buildQuickResourceItem('Breathing Exercises', Icons.air),
+          _buildQuickResourceItem('Mental Health Journal', Icons.book),
+          _buildQuickResourceItem('Therapy Resources', Icons.health_and_safety),
         ],
       ),
     );
@@ -1169,11 +1162,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
               color: Colors.blue.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
-              icon,
-              color: Colors.blue,
-              size: 20,
-            ),
+            child: Icon(icon, color: Colors.blue, size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -1190,10 +1179,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
                 const SizedBox(height: 4),
                 Text(
                   date,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                 ),
               ],
             ),
@@ -1214,26 +1200,15 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
       ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: Colors.green,
-            size: 20,
-          ),
+          Icon(icon, color: Colors.green, size: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
             ),
           ),
-          const Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.grey,
-            size: 14,
-          ),
+          const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 14),
         ],
       ),
     );
@@ -1272,10 +1247,7 @@ class _MentalHealthScreenState extends State<MentalHealthScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: isSelected ? Colors.red : Colors.grey,
-            ),
+            Icon(icon, color: isSelected ? Colors.red : Colors.grey),
             const SizedBox(height: 4),
             Container(
               height: 2,
