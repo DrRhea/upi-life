@@ -29,26 +29,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Kelompok 4',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                SizedBox(height: 8),
-                Text('Arya Jagadditha - NIM 2312239',
-                    style: TextStyle(color: Colors.white70)),
-                Text('Zaki Adam - NIM 2304934',
-                    style: TextStyle(color: Colors.white70)),
-              ],
-            ),
-          ),
+          _buildTeamSection(),
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(16),
@@ -70,6 +51,43 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTeamSection() {
+    return Container(
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.blueGrey[900],
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text(
+            'Kelompok 4',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          Divider(color: Colors.white54, thickness: 1),
+          SizedBox(height: 8),
+          Text('Arya Jagadditha - NIM 2312239',
+              style: TextStyle(fontSize: 16, color: Colors.white70)),
+          Text('Zaki Adam - NIM 2304934',
+              style: TextStyle(fontSize: 16, color: Colors.white70)),
         ],
       ),
     );
