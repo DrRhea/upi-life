@@ -16,9 +16,16 @@ class HomeScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.black87,
       appBar: AppBar(
-        title: const Text('UPI Life'),
+        title: const Text('UPI Life',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold)),
         centerTitle: true,
+        backgroundColor: Colors.black,
+        elevation: 0,
       ),
       body: Column(
         children: [
@@ -29,11 +36,16 @@ class HomeScreen extends StatelessWidget {
               children: const [
                 Text(
                   'Kelompok 4',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 SizedBox(height: 8),
-                Text('Arya Jagadditha - NIM 2312239'),
-                Text('Zaki Adam - NIM 2304934'),
+                Text('Arya Jagadditha - NIM 2312239',
+                    style: TextStyle(color: Colors.white70)),
+                Text('Zaki Adam - NIM 2304934',
+                    style: TextStyle(color: Colors.white70)),
               ],
             ),
           ),
@@ -65,7 +77,6 @@ class HomeScreen extends StatelessWidget {
 
   void _navigateToFeature(BuildContext context, String title) {
     Widget? screen;
-
     switch (title) {
       case 'Mental Health':
         screen = const MentalHealthScreen();
@@ -92,7 +103,6 @@ class HomeScreen extends StatelessWidget {
         screen = const ELearningScreen();
         break;
     }
-
     if (screen != null) {
       Navigator.push(
         context,
@@ -110,10 +120,7 @@ class Feature {
   final String title;
   final IconData icon;
 
-  Feature({
-    required this.title,
-    required this.icon,
-  });
+  Feature({required this.title, required this.icon});
 }
 
 final List<Feature> _features = [
@@ -131,34 +138,36 @@ class _FeatureCard extends StatelessWidget {
   final Feature feature;
   final VoidCallback onTap;
 
-  const _FeatureCard({
-    required this.feature,
-    required this.onTap,
-  });
+  const _FeatureCard({required this.feature, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      color: Colors.grey[900],
+      elevation: 8,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               feature.icon,
-              size: 48,
-              color: Theme.of(context).colorScheme.primary,
+              size: 60,
+              color: Colors.blueAccent,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             Text(
               feature.title,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
